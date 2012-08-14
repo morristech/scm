@@ -25,8 +25,8 @@ public abstract class StateMachineBase extends UIBuilder {
 
     public Container startApp(Resources res, String resPath, boolean loadTheme) {
         initVars();
-        UIBuilder.registerCustomComponent("MultiButton", com.codename1.components.MultiButton.class);
         UIBuilder.registerCustomComponent("Form", com.codename1.ui.Form.class);
+        UIBuilder.registerCustomComponent("MultiButton", com.codename1.components.MultiButton.class);
         UIBuilder.registerCustomComponent("Dialog", com.codename1.ui.Dialog.class);
         UIBuilder.registerCustomComponent("Label", com.codename1.ui.Label.class);
         UIBuilder.registerCustomComponent("List", com.codename1.ui.List.class);
@@ -60,8 +60,8 @@ public abstract class StateMachineBase extends UIBuilder {
 
     public Container createWidget(Resources res, String resPath, boolean loadTheme) {
         initVars();
-        UIBuilder.registerCustomComponent("MultiButton", com.codename1.components.MultiButton.class);
         UIBuilder.registerCustomComponent("Form", com.codename1.ui.Form.class);
+        UIBuilder.registerCustomComponent("MultiButton", com.codename1.components.MultiButton.class);
         UIBuilder.registerCustomComponent("Dialog", com.codename1.ui.Dialog.class);
         UIBuilder.registerCustomComponent("Label", com.codename1.ui.Label.class);
         UIBuilder.registerCustomComponent("List", com.codename1.ui.List.class);
@@ -112,10 +112,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return (com.codename1.ui.Container)findByName("Container3", root);
     }
 
-    public com.codename1.ui.Container findContainer2(Container root) {
-        return (com.codename1.ui.Container)findByName("Container2", root);
-    }
-
     public com.codename1.ui.Form findGUI1(Container root) {
         return (com.codename1.ui.Form)findByName("GUI 1", root);
     }
@@ -124,16 +120,20 @@ public abstract class StateMachineBase extends UIBuilder {
         return (com.codename1.ui.TextField)findByName("passwordTxt", root);
     }
 
-    public com.codename1.ui.Container findContainer1(Container root) {
-        return (com.codename1.ui.Container)findByName("Container1", root);
+    public com.codename1.ui.Container findContainer2(Container root) {
+        return (com.codename1.ui.Container)findByName("Container2", root);
+    }
+
+    public com.codename1.ui.Label findUsernameLbl(Container root) {
+        return (com.codename1.ui.Label)findByName("usernameLbl", root);
     }
 
     public com.codename1.ui.Form findGUI2(Container root) {
         return (com.codename1.ui.Form)findByName("GUI 2", root);
     }
 
-    public com.codename1.ui.Label findUsernameLbl(Container root) {
-        return (com.codename1.ui.Label)findByName("usernameLbl", root);
+    public com.codename1.ui.Container findContainer1(Container root) {
+        return (com.codename1.ui.Container)findByName("Container1", root);
     }
 
     public com.codename1.ui.Form findSplash(Container root) {
@@ -144,12 +144,12 @@ public abstract class StateMachineBase extends UIBuilder {
         return (com.codename1.components.MultiButton)findByName("reportsMbtn", root);
     }
 
-    public com.codename1.ui.Form findLoading(Container root) {
-        return (com.codename1.ui.Form)findByName("loading", root);
-    }
-
     public com.codename1.ui.Container findCustomerRenderer(Container root) {
         return (com.codename1.ui.Container)findByName("customerRenderer", root);
+    }
+
+    public com.codename1.ui.Form findLoading(Container root) {
+        return (com.codename1.ui.Form)findByName("loading", root);
     }
 
     public com.codename1.ui.Label findPasswordLbl(Container root) {
@@ -172,20 +172,16 @@ public abstract class StateMachineBase extends UIBuilder {
         return (com.codename1.ui.Form)findByName("Customer Select", root);
     }
 
-    public com.codename1.ui.Label findCustomerAddressLbl(Container root) {
-        return (com.codename1.ui.Label)findByName("customerAddressLbl", root);
-    }
-
     public com.codename1.ui.Label findLabel1(Container root) {
         return (com.codename1.ui.Label)findByName("Label1", root);
     }
 
-    public com.codename1.ui.Label findLabel(Container root) {
-        return (com.codename1.ui.Label)findByName("Label", root);
+    public com.codename1.components.MultiButton findName(Container root) {
+        return (com.codename1.components.MultiButton)findByName("name", root);
     }
 
-    public com.codename1.ui.Label findCustomerNameLbl(Container root) {
-        return (com.codename1.ui.Label)findByName("customerNameLbl", root);
+    public com.codename1.ui.Label findLabel(Container root) {
+        return (com.codename1.ui.Label)findByName("Label", root);
     }
 
     public com.codename1.ui.List findList(Container root) {
@@ -273,8 +269,18 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
     protected void exitForm(Form f) {
-        if("Customer Select".equals(f.getName())) {
-            exitCustomerSelect(f);
+        if("customerRenderer".equals(f.getName())) {
+            exitCustomerRenderer(f);
+            return;
+        }
+
+        if("splash".equals(f.getName())) {
+            exitSplash(f);
+            return;
+        }
+
+        if("loading".equals(f.getName())) {
+            exitLoading(f);
             return;
         }
 
@@ -293,25 +299,23 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
-        if("splash".equals(f.getName())) {
-            exitSplash(f);
-            return;
-        }
-
-        if("loading".equals(f.getName())) {
-            exitLoading(f);
-            return;
-        }
-
-        if("customerRenderer".equals(f.getName())) {
-            exitCustomerRenderer(f);
+        if("Customer Select".equals(f.getName())) {
+            exitCustomerSelect(f);
             return;
         }
 
     }
 
 
-    protected void exitCustomerSelect(Form f) {
+    protected void exitCustomerRenderer(Form f) {
+    }
+
+
+    protected void exitSplash(Form f) {
+    }
+
+
+    protected void exitLoading(Form f) {
     }
 
 
@@ -327,20 +331,22 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
-    protected void exitSplash(Form f) {
-    }
-
-
-    protected void exitLoading(Form f) {
-    }
-
-
-    protected void exitCustomerRenderer(Form f) {
+    protected void exitCustomerSelect(Form f) {
     }
 
     protected void beforeShow(Form f) {
-        if("Customer Select".equals(f.getName())) {
-            beforeCustomerSelect(f);
+        if("customerRenderer".equals(f.getName())) {
+            beforeCustomerRenderer(f);
+            return;
+        }
+
+        if("splash".equals(f.getName())) {
+            beforeSplash(f);
+            return;
+        }
+
+        if("loading".equals(f.getName())) {
+            beforeLoading(f);
             return;
         }
 
@@ -359,25 +365,23 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
-        if("splash".equals(f.getName())) {
-            beforeSplash(f);
-            return;
-        }
-
-        if("loading".equals(f.getName())) {
-            beforeLoading(f);
-            return;
-        }
-
-        if("customerRenderer".equals(f.getName())) {
-            beforeCustomerRenderer(f);
+        if("Customer Select".equals(f.getName())) {
+            beforeCustomerSelect(f);
             return;
         }
 
     }
 
 
-    protected void beforeCustomerSelect(Form f) {
+    protected void beforeCustomerRenderer(Form f) {
+    }
+
+
+    protected void beforeSplash(Form f) {
+    }
+
+
+    protected void beforeLoading(Form f) {
     }
 
 
@@ -393,20 +397,22 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
-    protected void beforeSplash(Form f) {
-    }
-
-
-    protected void beforeLoading(Form f) {
-    }
-
-
-    protected void beforeCustomerRenderer(Form f) {
+    protected void beforeCustomerSelect(Form f) {
     }
 
     protected void beforeShowContainer(Container c) {
-        if("Customer Select".equals(c.getName())) {
-            beforeContainerCustomerSelect(c);
+        if("customerRenderer".equals(c.getName())) {
+            beforeContainerCustomerRenderer(c);
+            return;
+        }
+
+        if("splash".equals(c.getName())) {
+            beforeContainerSplash(c);
+            return;
+        }
+
+        if("loading".equals(c.getName())) {
+            beforeContainerLoading(c);
             return;
         }
 
@@ -425,25 +431,23 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
-        if("splash".equals(c.getName())) {
-            beforeContainerSplash(c);
-            return;
-        }
-
-        if("loading".equals(c.getName())) {
-            beforeContainerLoading(c);
-            return;
-        }
-
-        if("customerRenderer".equals(c.getName())) {
-            beforeContainerCustomerRenderer(c);
+        if("Customer Select".equals(c.getName())) {
+            beforeContainerCustomerSelect(c);
             return;
         }
 
     }
 
 
-    protected void beforeContainerCustomerSelect(Container c) {
+    protected void beforeContainerCustomerRenderer(Container c) {
+    }
+
+
+    protected void beforeContainerSplash(Container c) {
+    }
+
+
+    protected void beforeContainerLoading(Container c) {
     }
 
 
@@ -459,20 +463,22 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
-    protected void beforeContainerSplash(Container c) {
-    }
-
-
-    protected void beforeContainerLoading(Container c) {
-    }
-
-
-    protected void beforeContainerCustomerRenderer(Container c) {
+    protected void beforeContainerCustomerSelect(Container c) {
     }
 
     protected void postShow(Form f) {
-        if("Customer Select".equals(f.getName())) {
-            postCustomerSelect(f);
+        if("customerRenderer".equals(f.getName())) {
+            postCustomerRenderer(f);
+            return;
+        }
+
+        if("splash".equals(f.getName())) {
+            postSplash(f);
+            return;
+        }
+
+        if("loading".equals(f.getName())) {
+            postLoading(f);
             return;
         }
 
@@ -491,25 +497,23 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
-        if("splash".equals(f.getName())) {
-            postSplash(f);
-            return;
-        }
-
-        if("loading".equals(f.getName())) {
-            postLoading(f);
-            return;
-        }
-
-        if("customerRenderer".equals(f.getName())) {
-            postCustomerRenderer(f);
+        if("Customer Select".equals(f.getName())) {
+            postCustomerSelect(f);
             return;
         }
 
     }
 
 
-    protected void postCustomerSelect(Form f) {
+    protected void postCustomerRenderer(Form f) {
+    }
+
+
+    protected void postSplash(Form f) {
+    }
+
+
+    protected void postLoading(Form f) {
     }
 
 
@@ -525,20 +529,22 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
-    protected void postSplash(Form f) {
-    }
-
-
-    protected void postLoading(Form f) {
-    }
-
-
-    protected void postCustomerRenderer(Form f) {
+    protected void postCustomerSelect(Form f) {
     }
 
     protected void postShowContainer(Container c) {
-        if("Customer Select".equals(c.getName())) {
-            postContainerCustomerSelect(c);
+        if("customerRenderer".equals(c.getName())) {
+            postContainerCustomerRenderer(c);
+            return;
+        }
+
+        if("splash".equals(c.getName())) {
+            postContainerSplash(c);
+            return;
+        }
+
+        if("loading".equals(c.getName())) {
+            postContainerLoading(c);
             return;
         }
 
@@ -557,25 +563,23 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
-        if("splash".equals(c.getName())) {
-            postContainerSplash(c);
-            return;
-        }
-
-        if("loading".equals(c.getName())) {
-            postContainerLoading(c);
-            return;
-        }
-
-        if("customerRenderer".equals(c.getName())) {
-            postContainerCustomerRenderer(c);
+        if("Customer Select".equals(c.getName())) {
+            postContainerCustomerSelect(c);
             return;
         }
 
     }
 
 
-    protected void postContainerCustomerSelect(Container c) {
+    protected void postContainerCustomerRenderer(Container c) {
+    }
+
+
+    protected void postContainerSplash(Container c) {
+    }
+
+
+    protected void postContainerLoading(Container c) {
     }
 
 
@@ -591,20 +595,22 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
-    protected void postContainerSplash(Container c) {
-    }
-
-
-    protected void postContainerLoading(Container c) {
-    }
-
-
-    protected void postContainerCustomerRenderer(Container c) {
+    protected void postContainerCustomerSelect(Container c) {
     }
 
     protected void onCreateRoot(String rootName) {
-        if("Customer Select".equals(rootName)) {
-            onCreateCustomerSelect();
+        if("customerRenderer".equals(rootName)) {
+            onCreateCustomerRenderer();
+            return;
+        }
+
+        if("splash".equals(rootName)) {
+            onCreateSplash();
+            return;
+        }
+
+        if("loading".equals(rootName)) {
+            onCreateLoading();
             return;
         }
 
@@ -623,25 +629,23 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
-        if("splash".equals(rootName)) {
-            onCreateSplash();
-            return;
-        }
-
-        if("loading".equals(rootName)) {
-            onCreateLoading();
-            return;
-        }
-
-        if("customerRenderer".equals(rootName)) {
-            onCreateCustomerRenderer();
+        if("Customer Select".equals(rootName)) {
+            onCreateCustomerSelect();
             return;
         }
 
     }
 
 
-    protected void onCreateCustomerSelect() {
+    protected void onCreateCustomerRenderer() {
+    }
+
+
+    protected void onCreateSplash() {
+    }
+
+
+    protected void onCreateLoading() {
     }
 
 
@@ -657,15 +661,7 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
-    protected void onCreateSplash() {
-    }
-
-
-    protected void onCreateLoading() {
-    }
-
-
-    protected void onCreateCustomerRenderer() {
+    protected void onCreateCustomerSelect() {
     }
 
     protected boolean setListModel(List cmp) {
@@ -688,13 +684,9 @@ public abstract class StateMachineBase extends UIBuilder {
             c = c.getParent().getLeadParent();
         }
         if(rootContainerName == null) return;
-        if(rootContainerName.equals("Customer Select")) {
-            if("searchTxt".equals(c.getName())) {
-                onCustomerSelect_SearchTxtAction(c, event);
-                return;
-            }
-            if("List".equals(c.getName())) {
-                onCustomerSelect_ListAction(c, event);
+        if(rootContainerName.equals("customerRenderer")) {
+            if("name".equals(c.getName())) {
+                onCustomerRenderer_NameAction(c, event);
                 return;
             }
         }
@@ -722,12 +714,23 @@ public abstract class StateMachineBase extends UIBuilder {
                 return;
             }
         }
+        if(rootContainerName.equals("Customer Select")) {
+            if("searchTxt".equals(c.getName())) {
+                onCustomerSelect_SearchTxtAction(c, event);
+                return;
+            }
+            if("name".equals(c.getName())) {
+                onCustomerSelect_NameAction(c, event);
+                return;
+            }
+            if("List".equals(c.getName())) {
+                onCustomerSelect_ListAction(c, event);
+                return;
+            }
+        }
     }
 
-      protected void onCustomerSelect_SearchTxtAction(Component c, ActionEvent event) {
-      }
-
-      protected void onCustomerSelect_ListAction(Component c, ActionEvent event) {
+      protected void onCustomerRenderer_NameAction(Component c, ActionEvent event) {
       }
 
       protected void onGUI2_SelectcustomerMbtnAction(Component c, ActionEvent event) {
@@ -743,6 +746,15 @@ public abstract class StateMachineBase extends UIBuilder {
       }
 
       protected void onGUI1_PasswordTxtAction(Component c, ActionEvent event) {
+      }
+
+      protected void onCustomerSelect_SearchTxtAction(Component c, ActionEvent event) {
+      }
+
+      protected void onCustomerSelect_NameAction(Component c, ActionEvent event) {
+      }
+
+      protected void onCustomerSelect_ListAction(Component c, ActionEvent event) {
       }
 
 }
